@@ -8,7 +8,7 @@ import org.junit.Test
 
 class LoginUpdateTest {
 
-    private val defaultModel = LoginModel(username = null)
+    private val defaultModel = LoginModel(username = null, password = null)
 
     @Test
     fun `when the user changes the username, UI should be updated`() {
@@ -19,6 +19,20 @@ class LoginUpdateTest {
             .then(
                 assertThatNext(
                     hasModel(defaultModel.usernameChanged(username = username)),
+                    hasNoEffects()
+                )
+            )
+    }
+
+    @Test
+    fun `when the user changes the password, UI should be updated`() {
+        val password = "Password"
+        UpdateSpec(LoginUpdate())
+            .given(defaultModel)
+            .whenEvent(PasswordChanged(password = password))
+            .then(
+                assertThatNext(
+                    hasModel(defaultModel.passwordChanged(password)),
                     hasNoEffects()
                 )
             )
