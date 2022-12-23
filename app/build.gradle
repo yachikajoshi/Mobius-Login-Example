@@ -47,4 +47,14 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+
+    //MOBIUS
+    implementation "com.spotify.mobius:mobius-core:1.5.9"
+    implementation "com.spotify.mobius:mobius-test:1.5.9"
+    implementation "com.spotify.mobius:mobius-rx2:1.5.9"
+    implementation "com.spotify.mobius:mobius-android:1.5.9"
+
+    //RXJava
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
 }
