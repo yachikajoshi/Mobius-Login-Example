@@ -1,7 +1,7 @@
 package com.yachika.mobiuslogin.ui.login
 
 import com.spotify.mobius.Next
-import com.spotify.mobius.Next.next
+import com.spotify.mobius.Next.*
 import com.spotify.mobius.Update
 
 class LoginUpdate : Update<LoginModel, LoginEvent, LoginEffect> {
@@ -9,6 +9,15 @@ class LoginUpdate : Update<LoginModel, LoginEvent, LoginEffect> {
         return when (event) {
             is UserNameChanged -> next(model.usernameChanged(event.username))
             is PasswordChanged -> next(model.passwordChanged(event.password))
+            is LoginButtonClicked -> dispatch(
+                setOf(
+                    ValidateInput(
+                        username = model.username,
+                        password = model.password
+                    )
+                )
+            )
+            is ValidationFailed -> noChange()
         }
     }
 }
