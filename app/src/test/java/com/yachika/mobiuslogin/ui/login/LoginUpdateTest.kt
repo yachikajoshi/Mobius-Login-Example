@@ -49,4 +49,18 @@ class LoginUpdateTest {
                 )
             )
     }
+
+    @Test
+    fun `when input validation is failed, then show the error`() {
+        val error = setOf(InputValidationErrors.EMPTY_PASSWORD)
+        UpdateSpec(LoginUpdate())
+            .given(defaultModel)
+            .whenEvent(ValidationFailed(error))
+            .then(
+                assertThatNext(
+                    hasNoModel(),
+                    hasEffects(ShowInvalidInputError(error))
+                )
+            )
+    }
 }

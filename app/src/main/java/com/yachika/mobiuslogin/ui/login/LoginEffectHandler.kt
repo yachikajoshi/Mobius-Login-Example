@@ -19,12 +19,13 @@ class LoginEffectHandler :
 
                     // add the validation if username is blank
                     // and password is bank and pass the necessary events
+                    is ShowInvalidInputError -> TODO()
                 }
             }
         }
     }
 
-    private fun validateInput(value: ValidateInput, output: Consumer<LoginEvent>) {
+    private fun validateInput(value: ValidateInput, output: Consumer<LoginEvent>){
         val username = value.username
         val password = value.password
 
