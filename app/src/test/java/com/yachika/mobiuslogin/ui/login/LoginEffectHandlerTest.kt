@@ -24,6 +24,19 @@ class LoginEffectHandlerTest {
         outputEvents.assertValues(ValidationFailed(setOf(EMPTY_USERNAME)))
     }
 
+    @Test
+    fun `when validate input is received, then validate the entered password`() {
+        //given
+
+        //when
+        val effect = ValidateInput(username = "Yachika", password = "")
+        connection.accept(effect)
+
+        //then
+        outputEvents.assertValues(ValidationFailed(setOf(EMPTY_PASSWORD)))
+    }
+
+
 
     @Test
     fun when_show_input_validation_error_effect_is_received_then_show_error() {
