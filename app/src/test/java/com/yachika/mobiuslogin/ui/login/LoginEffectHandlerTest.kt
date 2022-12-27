@@ -36,7 +36,17 @@ class LoginEffectHandlerTest {
         outputEvents.assertValues(ValidationFailed(setOf(EMPTY_PASSWORD)))
     }
 
+    @Test
+    fun `when validate input is received, then check the entered password length`() {
+        //given
 
+        //when
+        val effect = ValidateInput(username = "Yachika", password = "1234567")
+        connection.accept(effect)
+
+        //then
+        outputEvents.assertValues(ValidationFailed(setOf(PASSWORD_LESS_THAN_8_CHARACTER)))
+    }
 
     @Test
     fun when_show_input_validation_error_effect_is_received_then_show_error() {
