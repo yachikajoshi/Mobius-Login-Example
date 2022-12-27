@@ -63,4 +63,18 @@ class LoginUpdateTest {
                 )
             )
     }
+
+    @Test
+    fun `when input validation is success, then call login api`() {
+        UpdateSpec(LoginUpdate())
+            .given(defaultModel)
+            .whenEvent(ValidationSuccessful)
+            .then(
+                assertThatNext(
+                    hasNoModel(),
+                    hasEffects(LoggingIn(defaultModel.username, defaultModel.password))
+                )
+
+            )
+    }
 }
