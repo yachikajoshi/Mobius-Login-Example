@@ -49,6 +49,18 @@ class LoginEffectHandlerTest {
     }
 
     @Test
+    fun `when validate input is received with valid username and password, then show validation success`() {
+        //given
+
+        //when
+        val effect = ValidateInput("Yachika", "12345678")
+        connection.accept(effect)
+
+        //then
+        outputEvents.assertValues(ValidationSuccessful)
+    }
+
+    @Test
     fun when_show_input_validation_error_effect_is_received_then_show_error() {
         // given
 
@@ -72,7 +84,7 @@ class LoginEffectHandlerTest {
     }
 
     @Before
-     fun setup() {
+    fun setup() {
         val effectHandler = LoginEffectHandler()
         connection = effectHandler.connect(outputEvents)
     }

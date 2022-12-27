@@ -40,7 +40,7 @@ class LoginEffectHandler(
         val events = if (validationErrors.isNotEmpty()) {
             ValidationFailed(validationErrors)
         } else {
-            ValidationFailed(validationErrors)
+            ValidationSuccessful
         }
         output.accept(events)
     }
