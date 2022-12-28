@@ -105,4 +105,17 @@ class LoginUpdateTest {
                 )
             )
     }
+
+    @Test
+    fun `when user data save, then go to home screen`() {
+        UpdateSpec(LoginUpdate())
+            .given(defaultModel)
+            .whenEvent(UserSaved)
+            .then(
+                assertThatNext(
+                    hasNoModel(),
+                    hasEffects(GoToHomeScreen)
+                )
+            )
+    }
 }

@@ -119,7 +119,7 @@ class LoginEffectHandlerTest {
     }
 
     @Test
-    fun `when logging_in effect is failed then show login error message`(){
+    fun `when logging_in effect is failed then show login error message`() {
         //then
 
         //given
@@ -130,7 +130,7 @@ class LoginEffectHandlerTest {
     }
 
     @Test
-    fun `when loggin_in effect is successful then save the user`(){
+    fun `when loggin_in effect is successful then save the user`() {
         //then
 
         //given
@@ -138,6 +138,19 @@ class LoginEffectHandlerTest {
 
         //then
         outputEvents.assertValues(UserSaved)
+    }
+
+    @Test
+    fun `when user data is saved then go to home screen`() {
+
+        //then
+
+        //given
+        connection.accept(GoToHomeScreen)
+
+        //then
+        //todo UI mocking
+
     }
 
     @After

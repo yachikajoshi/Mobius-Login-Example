@@ -11,3 +11,5 @@ data class LoggingIn(val username: String, val password: String) : LoginEffect()
 object ShowLoginError : LoginEffect()
 
 data class SaveUserData(val username: String, val password: String) : LoginEffect()
+
+object GoToHomeScreen : LoginEffect()

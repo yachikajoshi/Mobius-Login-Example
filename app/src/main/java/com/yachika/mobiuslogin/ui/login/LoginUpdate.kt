@@ -21,7 +21,7 @@ class LoginUpdate : Update<LoginModel, LoginEvent, LoginEffect> {
             is ValidationSuccessful -> dispatch(setOf(LoggingIn(model.username, model.password)))
             LoginFailure -> dispatch(setOf(ShowLoginError))
             LoginSuccessful -> dispatch(setOf(SaveUserData(model.username, model.password)))
-            UserSaved -> noChange()
+            UserSaved -> dispatch(setOf(GoToHomeScreen))
         }
     }
 }

@@ -30,6 +30,9 @@ class LoginEffectHandler(
                     is SaveUserData -> {
                         output.accept(UserSaved)
                     }
+                    GoToHomeScreen -> {
+
+                    }
                 }
             }
         }
