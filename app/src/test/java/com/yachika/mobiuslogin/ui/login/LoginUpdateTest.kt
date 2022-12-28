@@ -79,4 +79,17 @@ class LoginUpdateTest {
                 )
             )
     }
+
+    @Test
+    fun `when login failed, then show the error`(){
+        UpdateSpec(LoginUpdate())
+            .given(defaultModel)
+            .whenEvent(LoginFailure)
+            .then (
+                assertThatNext(
+                    hasNoModel(),
+                    hasEffects(ShowLoginError)
+                )
+            )
+    }
 }

@@ -118,6 +118,17 @@ class LoginEffectHandlerTest {
         outputEvents.assertValues(LoginSuccessful)
     }
 
+    @Test
+    fun `when logging_in effect is failed then show login error message`(){
+        //then
+
+        //given
+        connection.accept(ShowLoginError)
+
+        //then
+        //todo UI mocking
+    }
+
     @After
     fun dispose() {
         connection.dispose()

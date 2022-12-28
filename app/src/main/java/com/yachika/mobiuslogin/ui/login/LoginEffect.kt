@@ -7,3 +7,5 @@ data class ValidateInput(val username: String, val password: String) : LoginEffe
 data class ShowInvalidInputError(val errors: Set<InputValidationErrors>) : LoginEffect()
 
 data class LoggingIn(val username: String, val password: String) : LoginEffect()
+
+object ShowLoginError : LoginEffect()

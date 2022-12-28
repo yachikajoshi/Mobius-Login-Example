@@ -24,6 +24,9 @@ class LoginEffectHandler(
 //                        uiActions.showInvalidErrors(value.errors)
                     }
                     is LoggingIn -> loginApi(value, output)
+                    ShowLoginError -> {
+
+                    }
                 }
             }
         }
