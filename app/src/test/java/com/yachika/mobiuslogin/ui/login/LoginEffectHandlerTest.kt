@@ -129,6 +129,17 @@ class LoginEffectHandlerTest {
         //todo UI mocking
     }
 
+    @Test
+    fun `when loggin_in effect is successful then save the user`(){
+        //then
+
+        //given
+        connection.accept(SaveUserData("Yachika", "12345678"))
+
+        //then
+        outputEvents.assertValues(UserSaved)
+    }
+
     @After
     fun dispose() {
         connection.dispose()

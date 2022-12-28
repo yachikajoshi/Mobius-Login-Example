@@ -81,14 +81,27 @@ class LoginUpdateTest {
     }
 
     @Test
-    fun `when login failed, then show the error`(){
+    fun `when login failed, then show the error`() {
         UpdateSpec(LoginUpdate())
             .given(defaultModel)
             .whenEvent(LoginFailure)
-            .then (
+            .then(
                 assertThatNext(
                     hasNoModel(),
                     hasEffects(ShowLoginError)
+                )
+            )
+    }
+
+    @Test
+    fun `when login success, then save the user data`() {
+        UpdateSpec(LoginUpdate())
+            .given(defaultModel)
+            .whenEvent(LoginSuccessful)
+            .then(
+                assertThatNext(
+                    hasNoModel(),
+                    hasEffects(SaveUserData(defaultModel.username, defaultModel.password))
                 )
             )
     }

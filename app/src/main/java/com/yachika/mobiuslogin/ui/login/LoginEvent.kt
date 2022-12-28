@@ -14,3 +14,4 @@ object ValidationSuccessful : LoginEvent()
 
 object LoginFailure : LoginEvent()
 object LoginSuccessful : LoginEvent()
+object UserSaved : LoginEvent()

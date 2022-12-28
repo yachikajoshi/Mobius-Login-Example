@@ -27,6 +27,9 @@ class LoginEffectHandler(
                     ShowLoginError -> {
 
                     }
+                    is SaveUserData -> {
+                        output.accept(UserSaved)
+                    }
                 }
             }
         }
@@ -42,6 +45,7 @@ class LoginEffectHandler(
     }
 
     private fun validateInput(value: ValidateInput, output: Consumer<LoginEvent>) {
+
         val username = value.username
         val password = value.password
 
