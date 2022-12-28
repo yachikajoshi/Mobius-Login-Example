@@ -19,6 +19,7 @@ class LoginUpdate : Update<LoginModel, LoginEvent, LoginEffect> {
             )
             is ValidationFailed -> dispatch(setOf(ShowInvalidInputError(event.loginEnum)))
             is ValidationSuccessful -> dispatch(setOf(LoggingIn(model.username, model.password)))
+            LoginFailure -> noChange()
         }
     }
 }

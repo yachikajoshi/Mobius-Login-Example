@@ -1,7 +1,5 @@
 package com.yachika.mobiuslogin.ui.login
 
-data class UserModel(
-    val name:String,
-    val email:String,
-    val password:String
-)
+interface FakeLogin {
+    fun loginUser(username: String, password: String): LoginResponse
+}

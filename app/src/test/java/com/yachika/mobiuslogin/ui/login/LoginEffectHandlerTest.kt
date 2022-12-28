@@ -1,16 +1,26 @@
 package com.yachika.mobiuslogin.ui.login
 
+import android.accounts.NetworkErrorException
 import com.spotify.mobius.Connection
 import com.spotify.mobius.test.RecordingConsumer
 import com.yachika.mobiuslogin.ui.login.InputValidationErrors.*
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import org.mockito.Mock
+import org.mockito.Mockito
+import com.nhaarman.mockitokotlin2.*
+import org.mockito.MockitoAnnotations
+import java.io.IOException
+import java.net.SocketTimeoutException
 
 class LoginEffectHandlerTest {
 
     private lateinit var connection: Connection<LoginEffect>
     private val outputEvents = RecordingConsumer<LoginEvent>()
+
+    @Mock
+    lateinit var userRepository: FakeLoginApi
 
     @Test
     fun when_validate_input_is_received_then_validate_the_entered_username() {
@@ -74,8 +84,21 @@ class LoginEffectHandlerTest {
         // is there another way to use the fake one that we've created here
     }
 
-    interface FakeUiActions {
-        fun showInvalidError(errors: Set<InputValidationErrors>)
+    @Test
+    fun when_logging_in_effect_is_received_then_login_is_failed() {
+        // given
+        val service = mock<FakeLogin>()
+        val userName = "yachika"
+        val password = "1234"
+
+        // when
+        connection.accept(LoggingIn(userName, password))
+
+        whenever(service.loginUser(username = userName, password = password))
+            .thenThrow()
+
+        // then
+        outputEvents.assertValues(LoginFailure)
     }
 
     @After
@@ -85,7 +108,8 @@ class LoginEffectHandlerTest {
 
     @Before
     fun setup() {
-        val effectHandler = LoginEffectHandler()
+        val effectHandler = LoginEffectHandler(FakeLoginApi())
         connection = effectHandler.connect(outputEvents)
     }
+
 }

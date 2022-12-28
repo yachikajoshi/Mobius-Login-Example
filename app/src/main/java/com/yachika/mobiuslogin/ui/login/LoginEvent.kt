@@ -11,3 +11,5 @@ object LoginButtonClicked : LoginEvent()
 data class ValidationFailed(val loginEnum: Set<InputValidationErrors>) : LoginEvent()
 
 object ValidationSuccessful : LoginEvent()
+
+object LoginFailure : LoginEvent()

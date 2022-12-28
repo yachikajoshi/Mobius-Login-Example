@@ -4,11 +4,13 @@ import com.spotify.mobius.test.NextMatchers.*
 import com.spotify.mobius.test.UpdateSpec
 import com.spotify.mobius.test.UpdateSpec.assertThatNext
 import org.junit.Test
+import org.mockito.Mock
+import org.mockito.Mockito
+import org.mockito.MockitoAnnotations
 
 class LoginUpdateTest {
 
     private val defaultModel = LoginModel(username = "", password = "")
-
 
     @Test
     fun `when the user changes the username, UI should be updated`() {
@@ -66,7 +68,7 @@ class LoginUpdateTest {
     }
 
     @Test
-    fun `when input validation is success, then call login api`() {
+    fun `when input validation is successful, then login the user`() {
         UpdateSpec(LoginUpdate())
             .given(defaultModel)
             .whenEvent(ValidationSuccessful)
@@ -75,7 +77,6 @@ class LoginUpdateTest {
                     hasNoModel(),
                     hasEffects(LoggingIn(defaultModel.username, defaultModel.password))
                 )
-
             )
     }
 }

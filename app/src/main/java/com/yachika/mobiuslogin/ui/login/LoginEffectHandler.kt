@@ -4,9 +4,11 @@ import com.spotify.mobius.Connectable
 import com.spotify.mobius.Connection
 import com.spotify.mobius.functions.Consumer
 import com.yachika.mobiuslogin.ui.login.InputValidationErrors.*
+import java.io.IOException
 
 class LoginEffectHandler(
 //    private val uiActions: UiActions
+    private val loginApi: FakeLoginApi
 ) :
     Connectable<LoginEffect, LoginEvent> {
     override fun connect(output: Consumer<LoginEvent>): Connection<LoginEffect> {
@@ -21,9 +23,18 @@ class LoginEffectHandler(
                     is ShowInvalidInputError -> {
 //                        uiActions.showInvalidErrors(value.errors)
                     }
-                    is LoggingIn -> TODO()
+                    is LoggingIn -> loginApi(value, output)
                 }
             }
+        }
+    }
+
+    private fun loginApi(value: LoggingIn, output: Consumer<LoginEvent>) {
+        try {
+            loginApi.loginUser(value.username, value.password)
+//            output.accept(LoginSuccessful)
+        } catch (e: IOException) {
+            output.accept(LoginFailure)
         }
     }
 
