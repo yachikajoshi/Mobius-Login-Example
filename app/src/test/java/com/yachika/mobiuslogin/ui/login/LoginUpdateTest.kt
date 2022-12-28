@@ -9,6 +9,7 @@ class LoginUpdateTest {
 
     private val defaultModel = LoginModel(username = "", password = "")
 
+
     @Test
     fun `when the user changes the username, UI should be updated`() {
         val username = "Lorem ipsum"
