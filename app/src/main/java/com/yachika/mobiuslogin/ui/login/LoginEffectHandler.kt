@@ -32,7 +32,7 @@ class LoginEffectHandler(
     private fun loginApi(value: LoggingIn, output: Consumer<LoginEvent>) {
         try {
             loginApi.loginUser(value.username, value.password)
-//            output.accept(LoginSuccessful)
+            output.accept(LoginSuccessful)
         } catch (e: IOException) {
             output.accept(LoginFailure)
         }

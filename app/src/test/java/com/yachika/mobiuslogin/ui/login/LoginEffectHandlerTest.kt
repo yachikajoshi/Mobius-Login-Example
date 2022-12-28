@@ -101,6 +101,23 @@ class LoginEffectHandlerTest {
         outputEvents.assertValues(LoginFailure)
     }
 
+    @Test
+    fun `when logging in effect is received then login is successful`() {
+        //given
+        val service = mock<FakeLogin>()
+        val userName = "rohit"
+        val password = "1234"
+
+        //when
+        connection.accept(LoggingIn(userName, password))
+
+        whenever(service.loginUser(username = userName, password = password))
+            .thenReturn(LoginResponse(""))
+
+        //then
+        outputEvents.assertValues(LoginSuccessful)
+    }
+
     @After
     fun dispose() {
         connection.dispose()

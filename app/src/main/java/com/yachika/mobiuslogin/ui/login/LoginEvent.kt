@@ -13,3 +13,4 @@ data class ValidationFailed(val loginEnum: Set<InputValidationErrors>) : LoginEv
 object ValidationSuccessful : LoginEvent()
 
 object LoginFailure : LoginEvent()
+object LoginSuccessful : LoginEvent()
