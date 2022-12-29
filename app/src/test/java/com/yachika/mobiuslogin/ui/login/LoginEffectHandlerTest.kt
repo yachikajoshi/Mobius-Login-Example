@@ -1,26 +1,18 @@
 package com.yachika.mobiuslogin.ui.login
 
-import android.accounts.NetworkErrorException
 import com.spotify.mobius.Connection
 import com.spotify.mobius.test.RecordingConsumer
 import com.yachika.mobiuslogin.ui.login.InputValidationErrors.*
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import org.mockito.Mock
-import org.mockito.Mockito
 import com.nhaarman.mockitokotlin2.*
-import org.mockito.MockitoAnnotations
-import java.io.IOException
-import java.net.SocketTimeoutException
 
 class LoginEffectHandlerTest {
 
     private lateinit var connection: Connection<LoginEffect>
     private val outputEvents = RecordingConsumer<LoginEvent>()
-
-    @Mock
-    lateinit var userRepository: FakeLoginApi
+    private val uiActions = mock<UiActions>()
 
     @Test
     fun when_validate_input_is_received_then_validate_the_entered_username() {
@@ -73,15 +65,15 @@ class LoginEffectHandlerTest {
     @Test
     fun when_show_input_validation_error_effect_is_received_then_show_error() {
         // given
+        val error = setOf(EMPTY_USERNAME)
 
         // when
-        val effect = ShowInvalidInputError(setOf(EMPTY_USERNAME))
+        val effect = ShowInvalidInputError(error)
         connection.accept(effect)
 
         // then
-        // ask Noyal on asserting ui actions here,
-        // one possible way is mocking ui actions,
-        // is there another way to use the fake one that we've created here
+        verify(uiActions).showInvalidErrors(error)
+        verifyNoMoreInteractions(uiActions)
     }
 
     @Test
@@ -160,7 +152,7 @@ class LoginEffectHandlerTest {
 
     @Before
     fun setup() {
-        val effectHandler = LoginEffectHandler(FakeLoginApi())
+        val effectHandler = LoginEffectHandler(uiActions, FakeLoginApi())
         connection = effectHandler.connect(outputEvents)
     }
 

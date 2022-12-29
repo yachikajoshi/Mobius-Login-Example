@@ -7,7 +7,7 @@ import com.yachika.mobiuslogin.ui.login.InputValidationErrors.*
 import java.io.IOException
 
 class LoginEffectHandler(
-//    private val uiActions: UiActions
+    private val uiActions: UiActions,
     private val loginApi: FakeLoginApi
 ) :
     Connectable<LoginEffect, LoginEvent> {
@@ -21,7 +21,7 @@ class LoginEffectHandler(
                 when (value) {
                     is ValidateInput -> validateInput(value, output)
                     is ShowInvalidInputError -> {
-//                        uiActions.showInvalidErrors(value.errors)
+                        uiActions.showInvalidErrors(value.errors)
                     }
                     is LoggingIn -> loginApi(value, output)
                     ShowLoginError -> {
