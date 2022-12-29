@@ -1,6 +1,8 @@
 package com.yachika.mobiuslogin.ui.login
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
 import com.spotify.mobius.Connection
 import com.spotify.mobius.Mobius
@@ -34,6 +36,21 @@ class LoginActivity : AppCompatActivity(), UiActions {
     }
 
     private fun connectEvents(events: Consumer<LoginEvent>): Connection<LoginModel> {
+
+        binding.username.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                events.accept(UserNameChanged(p0.toString()))
+            }
+
+        })
 
         return object : Connection<LoginModel> {
             override fun dispose() {
