@@ -51,6 +51,20 @@ class LoginActivity : AppCompatActivity(), UiActions {
             }
 
         })
+        binding.password.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                events.accept(PasswordChanged(p0.toString()))
+            }
+
+        })
 
         return object : Connection<LoginModel> {
             override fun dispose() {
