@@ -3,6 +3,8 @@ package com.yachika.mobiuslogin.ui.login
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.spotify.mobius.Connection
 import com.spotify.mobius.Mobius
@@ -65,9 +67,13 @@ class LoginActivity : AppCompatActivity(), UiActions {
             }
 
         })
+        binding.login.setOnClickListener {
+            events.accept(LoginButtonClicked)
+        }
 
         return object : Connection<LoginModel> {
             override fun dispose() {
+
             }
 
             override fun accept(value: LoginModel) {
@@ -77,6 +83,11 @@ class LoginActivity : AppCompatActivity(), UiActions {
 
     override fun showInvalidErrors(errors: Set<InputValidationErrors>) {
         // do when and show text depending on error
+        if (InputValidationErrors.EMPTY_USERNAME in errors) {
+            binding.usernameTL.error = "Invalid"
+        }else if (InputValidationErrors.EMPTY_PASSWORD in errors){
+
+        }
     }
 
     override fun onPause() {
