@@ -85,10 +85,16 @@ class LoginActivity : AppCompatActivity(), UiActions {
         // do when and show text depending on error
         if (InputValidationErrors.EMPTY_USERNAME in errors) {
             runOnUiThread {
-                binding.usernameTL.error = "Invalid"
+                binding.usernameTL.error = "Please enter the Username"
             }
         } else if (InputValidationErrors.EMPTY_PASSWORD in errors) {
-
+            runOnUiThread {
+                binding.passwordTL.error = "Please enter password"
+            }
+        }else if (InputValidationErrors.PASSWORD_LESS_THAN_8_CHARACTER in errors){
+            runOnUiThread {
+                binding.passwordTL.error = "Password must contain more than 8 digits"
+            }
         }
     }
 
