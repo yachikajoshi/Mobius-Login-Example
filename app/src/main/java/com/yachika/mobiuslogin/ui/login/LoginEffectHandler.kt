@@ -25,7 +25,7 @@ class LoginEffectHandler(
                     }
                     is LoggingIn -> loginApi(value, output)
                     ShowLoginError -> {
-
+                        uiActions.showLoginError()
                     }
                     is SaveUserData -> {
                         output.accept(UserSaved)

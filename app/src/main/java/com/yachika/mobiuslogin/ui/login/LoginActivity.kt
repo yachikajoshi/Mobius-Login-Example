@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import com.spotify.mobius.Connection
 import com.spotify.mobius.Mobius
 import com.spotify.mobius.MobiusLoop
@@ -91,10 +92,16 @@ class LoginActivity : AppCompatActivity(), UiActions {
             runOnUiThread {
                 binding.passwordTL.error = "Please enter password"
             }
-        }else if (InputValidationErrors.PASSWORD_LESS_THAN_8_CHARACTER in errors){
+        } else if (InputValidationErrors.PASSWORD_LESS_THAN_8_CHARACTER in errors) {
             runOnUiThread {
                 binding.passwordTL.error = "Password must contain more than 8 digits"
             }
+        }
+    }
+
+    override fun showLoginError() {
+        runOnUiThread {
+            Snackbar.make(binding.root, "Login Failed", Snackbar.LENGTH_LONG).show()
         }
     }
 

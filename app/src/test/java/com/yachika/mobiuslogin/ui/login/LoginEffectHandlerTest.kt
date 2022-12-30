@@ -118,7 +118,8 @@ class LoginEffectHandlerTest {
         connection.accept(ShowLoginError)
 
         //then
-        //todo UI mocking
+        uiActions.showLoginError()
+
     }
 
     @Test
