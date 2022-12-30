@@ -84,8 +84,10 @@ class LoginActivity : AppCompatActivity(), UiActions {
     override fun showInvalidErrors(errors: Set<InputValidationErrors>) {
         // do when and show text depending on error
         if (InputValidationErrors.EMPTY_USERNAME in errors) {
-            binding.usernameTL.error = "Invalid"
-        }else if (InputValidationErrors.EMPTY_PASSWORD in errors){
+            runOnUiThread {
+                binding.usernameTL.error = "Invalid"
+            }
+        } else if (InputValidationErrors.EMPTY_PASSWORD in errors) {
 
         }
     }
