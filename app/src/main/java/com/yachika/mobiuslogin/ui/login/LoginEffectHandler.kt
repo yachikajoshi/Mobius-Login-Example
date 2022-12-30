@@ -31,7 +31,7 @@ class LoginEffectHandler(
                         output.accept(UserSaved)
                     }
                     GoToHomeScreen -> {
-
+                        uiActions.goToHome()
                     }
                 }
             }

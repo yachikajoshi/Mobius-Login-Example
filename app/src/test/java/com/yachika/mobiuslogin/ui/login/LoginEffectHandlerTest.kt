@@ -142,8 +142,7 @@ class LoginEffectHandlerTest {
         connection.accept(GoToHomeScreen)
 
         //then
-        //todo UI mocking
-
+        uiActions.goToHome()
     }
 
     @After

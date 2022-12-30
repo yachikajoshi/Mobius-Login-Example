@@ -105,6 +105,14 @@ class LoginActivity : AppCompatActivity(), UiActions {
         }
     }
 
+    override fun goToHome() {
+        Snackbar.make(
+            binding.root,
+            "Login Successful, now user can go to next screen",
+            Snackbar.LENGTH_LONG
+        ).show()
+    }
+
     override fun onPause() {
         super.onPause()
         controller.stop()
